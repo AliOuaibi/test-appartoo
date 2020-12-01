@@ -1,0 +1,48 @@
+<div style=" margin: 0 auto;"> 
+    <div style="margin-top: 30px;">
+        <h1 style="font-family: 'Nerko One', cursive; text-align: center; font-size: 35px;">Liste des membres</h1>
+    </div>
+    <div style="text-align: center; margin-top: -60px;">
+        <img src="../../../assets/img/logo1.png" width="400" />
+    </div>
+</div>
+
+<div style="display: flex;">
+    <div>
+        <img src="../../../assets/img/friend.png" alt="" width="350">
+    </div>
+
+    <div style="width: 500px; margin: 0 auto;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Age</th>
+                    <th>Famille</th>
+                    <th>Nourriture</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of users">
+                <tr>
+                    <td title={{item.name}}><strong>{{item.name}}</strong></td>
+                    <td title={{item.age}}>{{item.age}} ans</td>
+                    <td title={{item.famille}}>{{item.famille}}</td>
+                    <td title={{item.nourriture}}>{{item.nourriture}}</td>
+                    <td title={{item.nourriture}}>
+                        <button type="submit" 
+                        class="button is-link"
+                        routerLink="/membre/{{item.name}}" 
+                        >
+                            Modifier
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+
+    <div>
+        <img src="../../../assets/img/gargamelle.png" alt="" width="350">
+    </div> 
+</div>
