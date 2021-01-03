@@ -14,8 +14,4 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // logout(): void {
-  //   // this.auth.logout();
-  //   this.router.navigate(['/login'], {queryParams: {loggedOut: 'success'}});
-  // }
 }

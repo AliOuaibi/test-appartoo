@@ -10,47 +10,24 @@ import { AuthService } from './../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm!: FormGroup;
+  loginForm: FormGroup;
   errors: any = [];
   notify!: string;
 
-  constructor(private auth: AuthService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.initForm();
-    this.route.queryParams.subscribe((params) => {
-      const key1 = 'registered';
-      const key2 = 'loggedOut';
-      if (params[key1] === 'success') {
-        this.notify = 'You have been successfully registered. Please Log in';
-      }
-      if (params[key2] === 'success') {
-        this.notify = 'You have been loggedout successfully';
-      }
-    });
+  constructor(
+    public formBuilder: FormBuilder,
+    public authService: AuthService,
+    public router: Router
+  ) {
+    this.loginForm= this.formBuilder.group({
+      email: [''],
+      password: ['']
+    })
   }
 
-  initForm(): void {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required,
-      Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
-      password: ['', Validators.required]
-    });
-  }
+  ngOnInit() { }
 
-  login(): void {
-    this.errors = [];
-    this.auth.login(this.loginForm.value)
-    .subscribe((token) => {
-      console.log(this.loginForm.value, "value");
-      // console.log(token,'token');
-      this.router.navigate(['/'], { queryParams: { loggedin: 'success' } });
-      
-       },
-        (errorResponse) => {
-          this.errors.push(errorResponse.error.error);
-        });
-        console.log(this.auth.login(this.loginForm.value));
-        
+  login() {    
+    this.authService.login(this.loginForm.value)
   }
 }

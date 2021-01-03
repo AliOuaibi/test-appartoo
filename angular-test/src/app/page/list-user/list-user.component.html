@@ -11,35 +11,44 @@
     <div>
         <img src="../../../assets/img/friend.png" alt="" width="350">
     </div>
-
-    <div style="width: 500px; margin: 0 auto;">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Age</th>
-                    <th>Famille</th>
-                    <th>Nourriture</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let item of users">
+    
+    <div style="width: 500px; margin: 0 auto;border-style: ridge;border-radius: 10px;padding: 10px; ">
+        <div style="display: flex; border-bottom-style: ridge;">
+            <div style="margin-left: 10px;"><h1><strong>Nom</strong></h1></div>
+            <div style="margin-left: 50px;"><h1><strong>Age</strong></h1></div>
+            <div style="margin-left: 40px;"><h1><strong>Famille</strong></h1></div>
+            <div style="margin-left: 110px;"><h1><strong>Nourriture</strong></h1></div>
+        </div>
+        <div style="display: flex;margin-top: 30px;" *ngFor="let item of users">
+            <div style="margin-left: 10px; width: 40px;"><h1><strong>{{item.name}}</strong></h1></div>
+            <div style="margin-left: 50px; width: 30px;"><h1>{{item.age}} ans</h1></div>
+            <div style="margin-left: 40px; width: 70px;" ><h1>{{item.famille}}</h1></div>
+            <div style="margin-left: 90px; width: 50px;"><h1>{{item.nourriture}}</h1></div>
+            <div style="margin-left: 50px;"><button type="submit" 
+                class="button is-primary is-rounded"
+                (click)="addFriend(item._id)">
+                    +
+                </button>
+            </div>
+        </div>
+        <!-- <table class="table">
+            <tbody *ngFor="let item of users" (ngSubmit)="addFriend()">
                 <tr>
                     <td title={{item.name}}><strong>{{item.name}}</strong></td>
                     <td title={{item.age}}>{{item.age}} ans</td>
                     <td title={{item.famille}}>{{item.famille}}</td>
                     <td title={{item.nourriture}}>{{item.nourriture}}</td>
                     <td title={{item.nourriture}}>
+
                         <button type="submit" 
-                        class="button is-link"
-                        routerLink="/membre/{{item.name}}" 
+                        class="button is-primary is-rounded"
                         >
-                            Modifier
+                            +
                         </button>
                     </td>
                 </tr>
             </tbody>
-        </table>    
+        </table>     -->
     </div>
 
     <div>

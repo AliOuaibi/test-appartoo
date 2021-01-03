@@ -22,8 +22,12 @@ export class RegisterComponent implements OnInit {
     this.auth.register(this.formData)
       .subscribe(() => {
         this.router.navigate(['/login'], { queryParams: { registered: 'success' } });
-       },
-        (errorResponse) => {          
+      },
+        (errorResponse) => {
+          // console.log(errorResponse.error,'error');
+          // if(errorResponse.error === "Email already exists error"){
+          //   alert('Adress mail existe déjà')
+          // }
           this.errors.push(errorResponse.error.error);
         });
   }

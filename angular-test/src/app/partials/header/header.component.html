@@ -12,13 +12,15 @@
         Accueil
       </a>
 
+    <ng-container *ngIf="auth.isLoggedIn()">
       <a class="navbar-item" routerLink="/membre">
         Membres
       </a>
+    </ng-container>
 
     </div>
 
-    <!-- <ng-container *ngIf="!auth.isAuthenticated()"> -->
+    <ng-container *ngIf="!auth.isLoggedIn()">
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
@@ -31,22 +33,16 @@
           </div>
         </div>
       </div>
-    <!-- </ng-container> -->
-    <!-- <ng-container *ngIf="auth.isAuthenticated()">
+    </ng-container>
+    <ng-container *ngIf="auth.isLoggedIn()">
       <div class="navbar-end">
         <div class="navbar-item">
-          <li class="nav-item" >
-             <a class="nav-link">
-             {{ auth.getUsername() }}
-             </a>
-           </li>
-          <li class="nav-item">
-             <a class="nav-link pointer" (click)="logout()">
-             Logout
-             </a>
-           </li> 
+          <div class="buttons">
+            <button class="button is-info is-rounded" (click)="auth.goProfile()">Profil</button>
+            <button class="button is-danger is-rounded" (click)="auth.logout()">Déconnexion</button>
+          </div>
         </div>
       </div>
-      </ng-container> -->
+      </ng-container>
   </div>
 </nav>

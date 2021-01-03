@@ -7,12 +7,13 @@ import { FormsModule }   from '@angular/forms';
 import { HeaderComponent } from './partials/header/header.component';
 import { appRoutes } from './app.routes';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthModule } from './auth/auth.module';
 import { ListUserComponent } from './page/list-user/list-user.component';
 import { UserModifComponent } from './page/user-modif/user-modif.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 @NgModule({
@@ -32,7 +33,13 @@ import { UserModifComponent } from './page/user-modif/user-modif.component';
     HttpClientModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
