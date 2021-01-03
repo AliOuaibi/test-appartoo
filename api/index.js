@@ -8,6 +8,7 @@ const app=express()
 
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
+const friendRoute = require('./routes/friend');
 
 app.use(morgan('dev'))
 
@@ -18,7 +19,7 @@ app.use(bodyParser.urlencoded({
 })); 
 app.use(express.json());
 
-app.use('/api', authRoute, postRoute)
+app.use('/api', authRoute, postRoute, friendRoute)
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 app.listen(4242, () => {

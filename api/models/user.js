@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+var mongoose = require('mongoose')
 
 var userSchema = new mongoose.Schema({
     name:{ 
@@ -33,6 +33,10 @@ var userSchema = new mongoose.Schema({
         max: 1024, 
         min: 6
     },
+    friends: [{ 
+        type: mongoose.Types.ObjectId, 
+        ref: 'Friends'
+    }]
 });
     
 var User = mongoose.model("User", userSchema); 
