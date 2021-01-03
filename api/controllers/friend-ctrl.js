@@ -8,6 +8,19 @@ const addFriend = async (req,res) => {
     })
 }
 
+const deleteFriend = async (req,res) => {
+    var requester = req.body.requester
+    var recipient = req.body.recipient 
+    await User.update(
+        { "_id": requester, "friends": recipient },
+        { "$pull": { "friends": recipient } },
+        { "multi": true },
+        function(err,user) {
+            return res.status(200).json({ success: true, data: user.friends })
+        }
+    )
+}
+
 const getFriend = async (req,res) => {
     var id = req.params.id
     await User.findOne({ _id: id }, (err, user) => {
@@ -26,5 +39,6 @@ const getFriend = async (req,res) => {
 //exportations des fonctionnalité
 module.exports = {
     addFriend,
+    deleteFriend,
     getFriend
 }
