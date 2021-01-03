@@ -49,7 +49,7 @@ postLogin = async (req,res) => {
 //recherche une personne par son nom
 getUserByName = async (req, res) => {
     var id = req.params.id
-    await User.findOne({ name: id }, (err, user) => {
+    await User.findOne({ _id: id }, (err, user) => {
         if (err) {
             // console.log(req.params,'teeeest');
             return res.status(400).json({ success: false, error: err })
