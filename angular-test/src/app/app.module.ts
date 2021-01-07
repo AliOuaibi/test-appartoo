@@ -12,7 +12,6 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthModule } from './auth/auth.module';
 import { ListUserComponent } from './page/list-user/list-user.component';
-import { UserModifComponent } from './page/user-modif/user-modif.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 
 
@@ -24,7 +23,6 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     FooterComponent,
     AuthComponent,
     ListUserComponent,
-    UserModifComponent,
   ],
   imports: [
     BrowserModule,

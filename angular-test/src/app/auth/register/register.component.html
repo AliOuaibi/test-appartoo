@@ -1,125 +1,95 @@
-<div style="margin-top: 30px;"> 
-    <div style="width: 250px; text-align: center; margin: auto;" >
-        <h1 style="font-family: 'Nerko One', cursive; font-size: 35px;">
-            Allez rejoint la SCHTROUMPF'FAMILY
-        </h1>
-    </div>
-    <div style=" text-align: center;">
-        <img src="../../assets/img/family.png" alt="" width="350">
-    </div>
+<div style="margin-top: 30px;">
+  <div style="width: 250px; text-align: center; margin: auto;">
+    <h1 style="font-family: 'Nerko One', cursive; font-size: 35px;">
+      Allez rejoins la SCHTROUMPF'FAMILY
+    </h1>
+  </div>
+  <div style=" text-align: center;">
+    <img src="../../assets/img/family.png" alt="" width="350">
+  </div>
 
-    <div style="margin-top: 20px;">
-        <div style="width: 300px; margin: 0 auto;">
-            <form #registerForm="ngForm">
-                <div class="field">
-                    <label class="label">Name</label>
-                    <div class="control">
-                      <input class="input" 
-                      type="text" 
-                      placeholder="Name"
-                      [(ngModel)] = "formData.name"
-                      name="name"
-                      #name = "ngModel"
-                      required>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control">
-                      <input class="input" 
-                      type="email" 
-                      placeholder="Email" 
-                      [(ngModel)] = "formData.email"
-                      name="email"
-                      #email = "ngModel"
-                      required>
-                    </div>
-                </div>
-                
-                <div class="field">
-                    <label class="label">Mot de passe</label>
-                    <div class="control"> 
-                      <input class="input" 
-                      type="password" 
-                      placeholder="Mot de passe" 
-                      [(ngModel)] = "formData.password"
-                      #password = "ngModel"
-                      name="password"
-                      required>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Âge</label>
-                    <div class="control">
-                      <input class="input" 
-                      type="number" 
-                      placeholder="Âge" 
-                      [(ngModel)] = "formData.age"
-                      #age = "ngModel"
-                      name="age"
-                      required>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Nourriture</label>
-                    <div class="control">
-                        <div class="select">
-                          <select [(ngModel)] = "formData.nourriture"
-                          #nourriture = "ngModel"
-                          name="nourriture"
-                          required>
-                            <option></option>
-                            <option value="omnivore">Omnivore</option>
-                            <option value="vegetarien">Vegetarien</option>
-                            <option value="vegetalien">Vegetalien</option>
-                          </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Famille</label>
-                    <div class="control">
-                        <div class="select">
-                          <select [(ngModel)] = "formData.famille"
-                          #famille = "ngModel"
-                          name="famille"
-                          required>
-                            <option></option>
-                            <option value="Schtroumpf ordinaire">Schtroumpf ordinaire</option>
-                            <option value="Schtroumpf moralisateur">Schtroumpf moralisateur</option>
-                            <option value="Schtroumpf boudeur">Schtroumpf boudeur</option>
-                            <option value="Schtroumpf musicien">Schtroumpf musicien</option>
-                            <option value="Schtroumpfette">Schtroumpfette</option>
-                            <option value="Schtroumpf gourmant">Schtroumpf gourmant</option>
-                            <option value="Schtroumpf bricoleur">Schtroumpf bricoleur</option>
-                            <option value="Schtroumpf amoureux">Schtroumpf amoureux</option>
-                            <option value="Schtroumpf noir">Schtroumpf noir</option>
-                            <option value="Schtroumpf costaud">Schtroumpf costaud</option>
-                            <option value="Schtroumpfobole">Schtroumpfobole</option>
-                            <option value="Schtroumpf grognon">Schtroumpf grognon</option>
-                            <option value="Schtroumpf dansant">Schtroumpf dansant</option>
-                            <option value="Schtroumpf developpeur">Schtroumpf developpeur</option>
-                          </select>
-                        </div>
-                    </div>
-                </div>
-                  
-                <div class="field is-grouped">
-                    <div class="control">
-                      <button 
-                      class="button is-link" 
-                      (click)="register()"
-                      type="submit" 
-                      [disabled] = "!registerForm.form.valid">Valider</button>
-                    </div>
-                </div>
-            </form>
+  <div style="margin-top: 20px;">
+    <div style="width: 300px; margin: 0 auto;">
+      <form #registerForm="ngForm">
+        <div class="field">
+          <label class="label">Nom</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="Nom" [(ngModel)]="formData.name" name="name" #name="ngModel"
+              required>
+          </div>
         </div>
+
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input class="input" type="email" placeholder="Email" [(ngModel)]="formData.email" name="email"
+              #email="ngModel" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Mot de passe</label>
+          <div class="control">
+            <input class="input" type="password" placeholder="Mot de passe" [(ngModel)]="formData.password"
+              #password="ngModel" name="password" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Âge</label>
+          <div class="control">
+            <input class="input" type="number" placeholder="Âge" [(ngModel)]="formData.age" #age="ngModel" name="age"
+              required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Nourriture</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="formData.nourriture" #nourriture="ngModel" name="nourriture" required>
+                <option></option>
+                <option value="omnivore">Omnivore</option>
+                <option value="vegetarien">Vegetarien</option>
+                <option value="vegetalien">Vegetalien</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Famille</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="formData.famille" #famille="ngModel" name="famille" required>
+                <option></option>
+                <option value="Schtroumpf ordinaire">Schtroumpf ordinaire</option>
+                <option value="Schtroumpf moralisateur">Schtroumpf moralisateur</option>
+                <option value="Schtroumpf boudeur">Schtroumpf boudeur</option>
+                <option value="Schtroumpf musicien">Schtroumpf musicien</option>
+                <option value="Schtroumpfette">Schtroumpfette</option>
+                <option value="Schtroumpf gourmant">Schtroumpf gourmant</option>
+                <option value="Schtroumpf bricoleur">Schtroumpf bricoleur</option>
+                <option value="Schtroumpf amoureux">Schtroumpf amoureux</option>
+                <option value="Schtroumpf noir">Schtroumpf noir</option>
+                <option value="Schtroumpf costaud">Schtroumpf costaud</option>
+                <option value="Schtroumpfobole">Schtroumpfobole</option>
+                <option value="Schtroumpf grognon">Schtroumpf grognon</option>
+                <option value="Schtroumpf dansant">Schtroumpf dansant</option>
+                <option value="Schtroumpf developpeur">Schtroumpf developpeur</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link" (click)="register()" type="submit"
+              [disabled]="!registerForm.form.valid">Valider</button>
+          </div>
+        </div>
+      </form>
     </div>
-    
+  </div>
+
 </div>
-  

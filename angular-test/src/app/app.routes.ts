@@ -3,7 +3,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ListUserComponent } from './page/list-user/list-user.component';
-import { UserModifComponent } from './page/user-modif/user-modif.component';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 import { AuthGuard } from "./auth/auth.guard";
 
@@ -23,10 +22,6 @@ export const appRoutes: Routes = [
     {
         path:'membre',
         component: ListUserComponent
-    },
-    {
-        path:'membre/:id',
-        component: UserModifComponent
     },
     {
         path:'profil/:id',

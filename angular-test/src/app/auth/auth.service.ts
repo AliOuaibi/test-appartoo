@@ -15,9 +15,11 @@ export class AuthService {
 
   private uriseg = 'http://localhost:4242/api';
   currentUser = {};
+  Name: any[]
 
   constructor(private http: HttpClient, public router: Router) { }
 
+  // Gestion d'Inscription et Connexion + TOKEN et déconnexion
   public register(userData: any): Observable<any> {
     const URI = this.uriseg + '/register';
     return this.http.post(URI, userData);
@@ -26,16 +28,16 @@ export class AuthService {
   public login(user: User) {
     const URI = this.uriseg + '/login';
     // console.log(user,'test');
-    return this.http.post(URI, user, {responseType: 'text'})
-    .subscribe((res: any) => {
-      // console.log(res,'logiiin');
-      localStorage.setItem('auth-token', res)
-      this.getUserProfile(res).subscribe((res) => {
-        // console.log(res._id,'teeeeeest');
-        this.currentUser = res;
-        this.router.navigate(['profil/' + res._id]);
+    return this.http.post(URI, user, { responseType: 'text' })
+      .subscribe((res: any) => {
+        // console.log(res,'logiiin');
+        localStorage.setItem('auth-token', res)
+        this.getUserProfile(res).subscribe((res) => {
+          // console.log(res._id,'teeeeeest');
+          this.currentUser = res;
+          this.router.navigate(['profil/' + res._id]);
+        })
       })
-    })
   }
 
   logout() {
@@ -52,66 +54,83 @@ export class AuthService {
     let authToken = localStorage.getItem('auth-token');
     return (authToken !== null) ? true : false;
   }
-  
+
   addFriend(a) {
     const URI = this.uriseg + '/addFriend';
-    console.log(a,'requete addFriend');
-    
-    return this.http.post(URI, a, {responseType: 'text'})
-    .subscribe((res: any) => {
-      console.log(res,'logiiin');
-      // this.getUserProfile(res).subscribe((res) => {
-        // console.log(res._id,'teeeeeest');
+    // console.log(a,'requete addFriend');
+
+    return this.http.post(URI, a, { responseType: 'text' })
+      .subscribe((res: any) => {
+        // console.log(res,'logiiin');
         this.currentUser = res;
-      // })
-    })
+      })
   }
 
+  // Gestion d'affichage d'autres utilisateur + ajout d'ami et suppression d'ami
   list(): Observable<User[]> {
     const URI = this.uriseg + '/users';
     return this.http.get(URI).pipe(
-      map((res: any)=> {
+      map((res: any) => {
         // console.log(res,'dataaa');
         return res.data || []
-      }) 
+      })
     );
   }
 
   show(id: string): Observable<User> {
     const URI = this.uriseg + '/user/' + id;
     return this.http.get(URI).pipe(
-      map((res: any)=> {
+      map((res: any) => {
         // console.log(res.data,'dataaa-show');
         return res.data || []
-      }) 
+      })
     );
   }
 
-  showFriend(id: string): Observable<User> {
+  friendShow(id): Observable<User[]> {
+    const URI = this.uriseg + '/user/' + id;
+    return this.http.get(URI).pipe(
+      map((res: any) => {
+        // console.log(res ,'dataaa-friend');
+        return res.data || []
+      })
+    );
+  }
+
+  showFriend(id: string): Observable<User[]> {
     const URI = this.uriseg + '/friend/' + id;
     return this.http.get(URI).pipe(
-      map((res: any)=> {
-        console.log(res.data,'dataaa-show');
-        return res.data || []
-      }) 
+      map((res: any) => {
+        var friend = res.data
+        // console.log(friend,'dataaa-show');
+        for (let i = 0; i < res.data.length; i++) {
+          this.friendShow(friend[i]).subscribe((res: any) => {
+            // console.log(res,'test finale');
+            this.currentUser = res;
+          })
+          return res.data || []
+        }
+      })
     );
   }
 
+  // Gestion de profil (affichage d'information et modification du profil)
   getUserProfile(id): Observable<any> {
     const URI = this.uriseg + '/user/';
     const URITOKEN = this.uriseg + '/post'
     return this.http.get(URITOKEN, {
-      headers: new HttpHeaders({ 
+      headers: new HttpHeaders({
         'auth-token': id
-      })}).pipe(
-      map((res: any)=> {
+      })
+    }).pipe(
+      map((res: any) => {
         // console.log(res,'testtoken');
         return res || []
-      }) 
+      })
     );
   }
 
-  goProfile(){
+  goProfile() {
     let res = localStorage.getItem('auth-token')
     return this.getUserProfile(res).subscribe((res) => {
       // console.log(res._id,'teeeeeest');
