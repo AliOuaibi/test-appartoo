@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ActivatedRoute, Router } from "@angular/router";
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
@@ -25,6 +27,7 @@ export class UserProfileComponent implements OnInit {
   mess : any
   Name: any
   users : any[]
+  // formData: any = {};
   nameList: Array<{name: string}> = []; 
 
 
@@ -96,11 +99,48 @@ export class UserProfileComponent implements OnInit {
     this.userService.update(this.formData, id)
       .subscribe(() => {
         alert('Modification du profil')
-        this.router.navigate(['/'], { queryParams: { registered: 'success' } });
+        location.reload()
       },
       (errorResponse) => {          
         this.errors.push(errorResponse.error.error);
       });
+  }
+
+  getUserProfile(id): Observable<any> {
+    const URI = this.uriseg + '/user/';
+    const URITOKEN = this.uriseg + '/post'
+    return this.http.get(URITOKEN, {
+      headers: new HttpHeaders({
+        'auth-token': id
+      })
+    }).pipe(
+      map((res: any) => {
+        // console.log(res,'testtoken');
+        return res || []
+      })
+    );
+  }
+
+  addNewFriend(): void {
+      this.userService.register(this.formData).subscribe((res) => {
+        // this.router.navigate(['/login'], { queryParams: { registered: 'success' } });
+        console.log(res.user,"test");
+
+        let b = res.user
+
+        let id = localStorage.getItem('auth-token')
+        return this.getUserProfile(id).subscribe((res) => {
+          console.log(res._id,'teeeeeest');
+          this.currentUser = res;
+          var add = {
+            requester: res._id,
+            recipient: b
+          }
+          this.userService.addFriend(add)
+          alert('Ami(e) ajouté !')
+          // console.log(add,'teeest');
+        })
+      })    
   }
 
 }
