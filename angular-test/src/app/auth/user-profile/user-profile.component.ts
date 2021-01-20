@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
 
   private uriseg = 'http://localhost:4242/api';
   currentUser = {};
-  name: any[]
+  namee: any[]
   agee: any[]
   nourrituree: any[]
   famillee: any[]
@@ -39,7 +39,7 @@ export class UserProfileComponent implements OnInit {
 
     this.userService.show(id).subscribe((res: any) => {
       this.agee = res.age
-      this.name = res.name
+      this.namee = res.name
       this.famillee = res.famille
       this.nourrituree = res.nourriture
     })
